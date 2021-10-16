@@ -40,7 +40,7 @@ class CardBody extends StatelessWidget {
                     ),
                     Text(
                       subtitle,
-                      style: SubitleCard,
+                      style: SubtitleCard,
                     )
                   ],
                 )),

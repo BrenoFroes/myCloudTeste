@@ -14,31 +14,33 @@ class VerticalCard extends StatelessWidget {
       padding: const EdgeInsets.only(left: 7, right: 7),
       child: Container(
         width: 130.0,
+        height: 80.0,
         child: Card(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                Container(
-                  width: 80.0,
-                  height: 80.0,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: NetworkImage("https://i.imgur.com/BoN9kdC.png"),
-                    ),
-                  ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child:
+                      Container(
+                        width: 50.0,
+                        height: 50.0,
+                        child: Image.network("https://i.imgur.com/BoN9kdC.png"),
+                      ),
+                ),
+                SizedBox(
+                  height: 10.0,
                 ),
                 Text(
                   title,
-                  style: TitleCard,
+                  style: SubtitleCard,
                 ),
                 Text(
                   subtitle,
-                  style: SubitleCard,
+                  style: Body1TextStyle,
                 )
               ],
             ),

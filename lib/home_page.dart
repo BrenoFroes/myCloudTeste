@@ -5,9 +5,11 @@ import 'package:my_cloud_teste/style.dart';
 import 'package:my_cloud_teste/widgets/card_body.dart';
 import 'package:my_cloud_teste/widgets/vertical_card.dart';
 
+import 'movie/movie_list_page.dart';
+
 class HomePage extends StatelessWidget {
   TextEditingController movieCtrl = new TextEditingController();
-
+  var movieListPage = new MovieListPage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +68,7 @@ class HomePage extends StatelessWidget {
               ),
               padding: const EdgeInsets.all(16),
             ),
-            VerticalCard('Oi', 'ola'),
+            Expanded(child: movieListPage),
           ],
         ),
       ),

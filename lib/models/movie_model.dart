@@ -1,7 +1,7 @@
 class Movie {
   late int id;
-  late int title;
-  late int original_title;
+  late String title;
+  late String original_title;
   late String votation;
   late String photo;
   late String description;

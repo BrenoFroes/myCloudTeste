@@ -3,7 +3,7 @@ class Movie {
   late String title;
   late String original_title;
   late String votation;
-  late String photo;
+  late String poster_path;
   late String description;
 
   Movie(
@@ -11,8 +11,9 @@ class Movie {
       required this.title,
       required this.original_title,
       required this.votation,
-      required this.photo,
-      required this.description});
+      required this.poster_path,
+      required this.description
+      });
 
   // Converte um objeto JSON em um objeto Survey
   Movie.fromJson(Map<String, dynamic> json) {
@@ -20,7 +21,7 @@ class Movie {
     title = json['title'];
     original_title = json['original_title'];
     votation = json['votation'];
-    photo = json['photo'];
+    poster_path = json['poster_path'];
     description = json['description'];
   }
 
@@ -31,7 +32,7 @@ class Movie {
     data['title'] = this.title;
     data['original_title'] = this.original_title;
     data['votation'] = this.votation;
-    data['photo'] = this.photo;
+    data['poster_path'] = this.poster_path;
     data['description'] = this.description;
     return data;
   }

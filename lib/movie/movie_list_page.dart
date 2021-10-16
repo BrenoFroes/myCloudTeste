@@ -6,26 +6,49 @@ import 'dart:convert';
 import 'package:my_cloud_teste/widgets/vertical_card.dart';
 
 class MovieListPage extends StatefulWidget {
-  const MovieListPage({Key? key}) : super(key: key);
+  String call = '';
+  MovieListPage({Key? key, required this.call}) : super(key: key);
 
   @override
   _MovieListPageState createState() => _MovieListPageState();
 }
 
 class _MovieListPageState extends State<MovieListPage> {
-  List<Movie> _movies = <Movie>[];
+  List<Movie> _nowPlayingMovies = <Movie>[];
+  List<Movie> _popularMovies = <Movie>[];
 
-  Future<List<Movie>> fetchMovie() async {
-    var url =
-        'https://api.themoviedb.org/3/movie/now_playing?api_key=f02f27dcc375a0f273bfc120a646e037&language=pt-BR';
+  var url = 'https://api.themoviedb.org/3/movie/';
+  var parameters = '?api_key=f02f27dcc375a0f273bfc120a646e037&language=pt-BR';
+
+  Future<List<Movie>> popularMovie() async {
     var response = await http.get(
-      url,
+      url + 'popular' + parameters,
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
     );
-    print(url);
+    var listMovies = <Movie>[];
+    if (response.statusCode == 200) {
+      var movieDecode = utf8.decode(response.bodyBytes);
+      var moviesJson = jsonDecode(movieDecode);
+      moviesJson = moviesJson['results'];
+      for (var movieDecode in moviesJson) {
+        var movie = Movie.fromJson(movieDecode);
+        listMovies.add(movie);
+      }
+    }
+    return listMovies;
+  }
+
+  Future<List<Movie>> nowPlayingMovie() async {
+    var response = await http.get(
+      url + 'now_playing' + parameters,
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+    );
     var listMovies = <Movie>[];
     if (response.statusCode == 200) {
       var movieDecode = utf8.decode(response.bodyBytes);
@@ -41,9 +64,14 @@ class _MovieListPageState extends State<MovieListPage> {
 
   @override
   void initState() {
-    fetchMovie().then((value) {
+    popularMovie().then((value) {
       setState(() {
-        _movies.addAll(value);
+        _popularMovies.addAll(value);
+      });
+    });
+    nowPlayingMovie().then((value) {
+      setState(() {
+        _nowPlayingMovies.addAll(value);
       });
     });
     super.initState();
@@ -51,14 +79,40 @@ class _MovieListPageState extends State<MovieListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) {
-        return VerticalCard(
-            '${_movies[index].title}', '${_movies[index].original_title}');
-      },
-      itemCount: _movies.length,
-    );
+    switch (widget.call) {
+      case 'nowPlaying':
+        return ListView.builder(
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return VerticalCard(_nowPlayingMovies[index].title,
+                _nowPlayingMovies[index].poster_path);
+          },
+          itemCount: _nowPlayingMovies.length,
+        );
+        break;
+      case 'popular':
+        return ListView.builder(
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return VerticalCard(_popularMovies[index].title,
+                _popularMovies[index].poster_path);
+          },
+          itemCount: _popularMovies.length,
+        );
+        break;
+      default:
+        return ListView.builder(
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return VerticalCard(_popularMovies[index].title,
+                _popularMovies[index].poster_path);
+          },
+          itemCount: _popularMovies.length,
+        );
+        break;
+    }
   }
 }

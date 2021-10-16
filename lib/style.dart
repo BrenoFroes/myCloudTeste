@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const LargeTextSize = 26.0;
 const MediumTextSize = 20.0;
-const BodyTextSize = 14.0;
+const BodyTextSize = 8.0;
 
 const String FontNameDefaultTitle = 'Raleway';
 const String FontNameDefaultBody = 'Roboto';
@@ -54,13 +54,13 @@ const AppBarStyle = TextStyle(
     fontWeight: FontWeight.w700);
 
 const TitleCard = TextStyle(
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: FontWeight.w600,
     color: Gray3,
     fontFamily: FontNameDefaultTitle);
 
 const SubtitleCard = TextStyle(
-    fontSize: 16,
+    fontSize: 10,
     color: Gray3,
     fontWeight: FontWeight.w500,
     fontFamily: FontNameDefaultBody);

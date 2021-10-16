@@ -2,14 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:my_cloud_teste/style.dart';
-import 'package:my_cloud_teste/widgets/card_body.dart';
+import 'package:my_cloud_teste/widgets/horizontal_card.dart';
 import 'package:my_cloud_teste/widgets/vertical_card.dart';
 
 import 'movie/movie_list_page.dart';
 
 class HomePage extends StatelessWidget {
   TextEditingController movieCtrl = new TextEditingController();
-  var movieListPage = new MovieListPage();
+  var popularMovieListPage = new MovieListPage(call: 'popular');
+  var nowPlayingMovieListPage = new MovieListPage(call: 'nowPlaying');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,17 +46,7 @@ class HomePage extends StatelessWidget {
               ),
               padding: const EdgeInsets.all(16),
             ),
-            GestureDetector(
-              child: CardBody('Oi', 'Ola'),
-              onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => SurveyPage(plate: _placaBody),
-                //   ),
-                // );
-              },
-            ),
+            Expanded(child: nowPlayingMovieListPage),
             Padding(
               child: Text(
                 "Mais populares",
@@ -68,7 +60,7 @@ class HomePage extends StatelessWidget {
               ),
               padding: const EdgeInsets.all(16),
             ),
-            Expanded(child: movieListPage),
+            Expanded(child: popularMovieListPage),
           ],
         ),
       ),

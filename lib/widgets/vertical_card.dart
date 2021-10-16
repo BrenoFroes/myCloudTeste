@@ -14,8 +14,8 @@ class VerticalCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 7, right: 7),
       child: Container(
-        width: 130.0,
-        height: 80.0,
+        width: 100.0,
+        height: 50.0,
         child: Card(
           child: Padding(
             padding: const EdgeInsets.all(10.0),

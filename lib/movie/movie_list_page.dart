@@ -96,8 +96,8 @@ class _MovieListPageState extends State<MovieListPage> {
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
-            return VerticalCard(_popularMovies[index].title,
-                _popularMovies[index].poster_path);
+            return VerticalCard(
+                _popularMovies[index].title, _popularMovies[index].poster_path);
           },
           itemCount: _popularMovies.length,
         );
@@ -107,8 +107,8 @@ class _MovieListPageState extends State<MovieListPage> {
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
-            return VerticalCard(_popularMovies[index].title,
-                _popularMovies[index].poster_path);
+            return VerticalCard(
+                _popularMovies[index].title, _popularMovies[index].poster_path);
           },
           itemCount: _popularMovies.length,
         );

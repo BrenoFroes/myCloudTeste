@@ -35,23 +35,41 @@ class _DetailMovieState extends State<DetailMovie> {
         height: double.infinity,
         child: Padding(
           padding: EdgeInsets.all(16.0),
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    MovieImage(poster_path: widget.movie.backdrop_path),
-                    Text(widget.movie.title, style: TitleTextStyle),
-                    Text(widget.movie.original_title, style: TitleCard),
-                    Text(widget.movie.description, style: SubtitleCard),
-                    ElevatedButton(
-                      onPressed: () => _launchURL(widget.movie.title),
-                      child: new Text('Acessar'),
-                    ),
-                  ]),
-            ),
+          child: Column(
+            children: [
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      MovieImage(poster_path: widget.movie.backdrop_path),
+                      Text(widget.movie.title, style: TitleTextStyle),
+                      Text(widget.movie.original_title, style: TitleCard),
+                      Text(widget.movie.description, style: SubtitleCard),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () => _launchURL(widget.movie.title),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Text('Saiba mais'),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: PrimaryRed3,
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 120, vertical: 20),
+                    textStyle:
+                        TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

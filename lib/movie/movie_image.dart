@@ -43,7 +43,10 @@ class _MovieImageState extends State<MovieImage> {
   Widget build(BuildContext context) {
     return Container(
       width: 80.0,
-      child: Image.network(link),
+      child: FadeInImage(
+        image: NetworkImage(link),
+        placeholder: AssetImage('assets/image/download.png'),
+      ),
     );
   }
 }

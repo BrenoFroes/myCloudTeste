@@ -41,6 +41,9 @@ class _MovieImageState extends State<MovieImage> {
 
   @override
   Widget build(BuildContext context) {
-    return Image.network(link);
+    return Container(
+      width: 80.0,
+      child: Image.network(link),
+    );
   }
 }

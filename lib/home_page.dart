@@ -1,8 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:my_cloud_teste/movie/movie_bloc.dart';
+import 'package:my_cloud_teste/movie/movie_block.dart';
 import 'package:my_cloud_teste/style.dart';
+import 'package:my_cloud_teste/views/detail_movie.dart';
 import 'package:my_cloud_teste/widgets/horizontal_card.dart';
 import 'package:my_cloud_teste/widgets/vertical_card.dart';
 
@@ -14,12 +17,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var bloc = new MovieBloc();
+  var bloc = new MovieBlock();
 
   var is_visible = 0;
-  var _id = "";
-  var _title = "";
-  var _poster_path = "";
+  var _response;
   // is_visible == 0 (default), is_visible == 1 (no results), is_visible == 2 (found results)
   var popularMovieListPage = new MovieListPage(call: 'popular');
 
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: TextFormField(
           keyboardType: TextInputType.text,
@@ -102,9 +104,7 @@ class _HomePageState extends State<HomePage> {
                   Scaffold.of(context).showSnackBar(message);
                   setState(() {
                     is_visible = 2;
-                    _id = '$response["id"]';
-                    _title = response["title"];
-                    _poster_path = response["poster_path"];
+                    _response = response;
                   });
                 }
               },
@@ -112,17 +112,15 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: bodyContent(is_visible, _id, _title, _poster_path),
+      body: bodyContent(is_visible, _response),
     );
   }
 }
 
 class ContentWithResults extends StatelessWidget {
-  var _id = '';
-  var _title = '';
-  var _poster_path = '';
+  var response;
 
-  ContentWithResults(this._id, this._title, this._poster_path);
+  ContentWithResults(this.response);
 
   @override
   Widget build(BuildContext context) {
@@ -142,14 +140,14 @@ class ContentWithResults extends StatelessWidget {
           padding: const EdgeInsets.all(16),
         ),
         GestureDetector(
-          child: HorizontalCard(_title, _poster_path),
+          child: HorizontalCard(response.title, response.poster_path),
           onTap: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => SurveyPage(plate: _placaBody),
-            //   ),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DetailMovie(movie: response),
+              ),
+            );
           },
         ),
       ],
@@ -256,13 +254,13 @@ class PresetContent extends StatelessWidget {
   }
 }
 
-bodyContent(is_visible, _id, _title, _poster_path) {
+bodyContent(is_visible, _response) {
   switch (is_visible) {
     case 1:
       return ContentWithoutResults();
       break;
     case 2:
-      return ContentWithResults(_id, _title, _poster_path);
+      return ContentWithResults(_response);
       break;
     case 3:
       return ContentLoading();

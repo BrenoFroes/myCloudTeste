@@ -12,9 +12,9 @@ class VerticalCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 7, right: 7),
+      padding: const EdgeInsets.only(left: 5, right: 5),
       child: Container(
-        width: 100.0,
+        width: 120.0,
         height: 50.0,
         child: Card(
           child: Padding(
@@ -25,7 +25,7 @@ class VerticalCard extends StatelessWidget {
               children: <Widget>[
                 MovieImage(poster_path: poster_path),
                 SizedBox(
-                  height: 10.0,
+                  height: 5.0,
                 ),
                 Text(
                   title,

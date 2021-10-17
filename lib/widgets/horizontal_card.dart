@@ -20,12 +20,12 @@ class HorizontalCard extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 MovieImage(poster_path: poster_path),
                 SizedBox(
-                  height: 10.0,
+                  width: 10.0,
                 ),
                 Text(
                   title,

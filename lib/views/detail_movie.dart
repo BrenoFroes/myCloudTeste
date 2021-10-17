@@ -37,18 +37,21 @@ class _DetailMovieState extends State<DetailMovie> {
           padding: EdgeInsets.all(16.0),
           child: Column(
             children: [
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      MovieImage(poster_path: widget.movie.backdrop_path),
-                      Text(widget.movie.title, style: TitleTextStyle),
-                      Text(widget.movie.original_title, style: TitleCard),
-                      Text(widget.movie.description, style: SubtitleCard),
-                    ],
+              Container(
+                height: 300.0,
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        MovieImage(poster_path: widget.movie.backdrop_path),
+                        Text(widget.movie.title, style: TitleTextStyle),
+                        Text(widget.movie.original_title, style: TitleCard),
+                        Text(widget.movie.description, style: SubtitleCard),
+                      ],
+                    ),
                   ),
                 ),
               ),

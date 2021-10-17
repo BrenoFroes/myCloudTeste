@@ -6,6 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:my_cloud_teste/movie/movie_block.dart';
 import 'package:my_cloud_teste/style.dart';
 import 'package:my_cloud_teste/views/detail_movie.dart';
+import 'package:my_cloud_teste/views/home/content_loading.dart';
+import 'package:my_cloud_teste/views/home/content_whitout_results.dart';
+import 'package:my_cloud_teste/views/home/content_with_results.dart';
+import 'package:my_cloud_teste/views/home/preset_content.dart';
 import 'package:my_cloud_teste/widgets/horizontal_card.dart';
 import 'package:my_cloud_teste/widgets/vertical_card.dart';
 
@@ -22,10 +26,7 @@ class _HomePageState extends State<HomePage> {
   var is_visible = 0;
   var _response;
   // is_visible == 0 (default), is_visible == 1 (no results), is_visible == 2 (found results)
-  var popularMovieListPage = new MovieListPage(call: 'popular');
-
-  var nowPlayingMovieListPage = new MovieListPage(call: 'nowPlaying');
-
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,143 +114,6 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: bodyContent(is_visible, _response),
-    );
-  }
-}
-
-class ContentWithResults extends StatelessWidget {
-  var response;
-
-  ContentWithResults(this.response);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      children: <Widget>[
-        Padding(
-          child: Text(
-            "Resultados:",
-            textAlign: TextAlign.start,
-            style: TextStyle(
-              color: PrimaryRed3,
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-              fontFamily: FontNameDefaultBody,
-            ),
-          ),
-          padding: const EdgeInsets.all(16),
-        ),
-        GestureDetector(
-          child: HorizontalCard(response.title, response.poster_path),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DetailMovie(movie: response),
-              ),
-            );
-          },
-        ),
-      ],
-    );
-  }
-}
-
-class ContentWithoutResults extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: <Widget>[
-          SizedBox(
-            height: 200,
-          ),
-          RichText(
-            text: TextSpan(
-              children: [
-                WidgetSpan(
-                  child: Icon(
-                    Icons.not_interested,
-                    size: 24,
-                    color: Gray5,
-                  ),
-                ),
-                TextSpan(
-                  text: " Sem resultados",
-                  style: TextStyle(
-                      color: Gray5,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: FontNameDefaultBody,
-                      fontSize: 22),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class ContentLoading extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        height: 150.0,
-        width: 150.0,
-        child: CircularProgressIndicator(
-            valueColor: new AlwaysStoppedAnimation<Color>(Gray5),
-            strokeWidth: 10.0),
-      ),
-    );
-  }
-}
-
-class PresetContent extends StatelessWidget {
-  var popularMovieListPage = new MovieListPage(call: 'popular');
-
-  var nowPlayingMovieListPage = new MovieListPage(call: 'nowPlaying');
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            child: Text(
-              "Últimos lançamentos",
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                color: Gray4,
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                fontFamily: FontNameDefaultBody,
-              ),
-            ),
-            padding: const EdgeInsets.all(16),
-          ),
-          Expanded(child: nowPlayingMovieListPage),
-          Padding(
-            child: Text(
-              "Mais populares",
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                color: Gray4,
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                fontFamily: FontNameDefaultBody,
-              ),
-            ),
-            padding: const EdgeInsets.all(16),
-          ),
-          Expanded(child: popularMovieListPage),
-        ],
-      ),
     );
   }
 }

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:my_cloud_teste/models/movie_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:my_cloud_teste/views/detail_movie.dart';
 import 'dart:convert';
 
 import 'package:my_cloud_teste/widgets/vertical_card.dart';
 
 class MovieListPage extends StatefulWidget {
   String call = '';
-  MovieListPage({Key? key, required this.call}) : super(key: key);
+  MovieListPage({Key? key, required this.call})
+      : super(key: key);
 
   @override
   _MovieListPageState createState() => _MovieListPageState();
@@ -85,8 +87,18 @@ class _MovieListPageState extends State<MovieListPage> {
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
-            return VerticalCard(_nowPlayingMovies[index].title,
-                _nowPlayingMovies[index].poster_path);
+            return GestureDetector(
+              child: VerticalCard(_nowPlayingMovies[index].title,
+                  _nowPlayingMovies[index].poster_path),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailMovie(movie: _nowPlayingMovies[index])
+                  ),
+                );
+              },
+            );
           },
           itemCount: _nowPlayingMovies.length,
         );
@@ -96,8 +108,18 @@ class _MovieListPageState extends State<MovieListPage> {
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
-            return VerticalCard(
-                _popularMovies[index].title, _popularMovies[index].poster_path);
+            return GestureDetector(
+              child: VerticalCard(
+                _popularMovies[index].title, _popularMovies[index].poster_path),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailMovie(movie: _popularMovies[index])
+                  ),
+                );
+              },
+            );
           },
           itemCount: _popularMovies.length,
         );
@@ -107,8 +129,18 @@ class _MovieListPageState extends State<MovieListPage> {
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
-            return VerticalCard(
-                _popularMovies[index].title, _popularMovies[index].poster_path);
+            return GestureDetector(
+              child: VerticalCard(
+                _popularMovies[index].title, _popularMovies[index].poster_path),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailMovie(movie: _popularMovies[index])
+                  ),
+                );
+              },
+            );
           },
           itemCount: _popularMovies.length,
         );

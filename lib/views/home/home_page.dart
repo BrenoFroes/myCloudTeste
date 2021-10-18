@@ -13,7 +13,7 @@ import 'package:my_cloud_teste/views/home/preset_content.dart';
 import 'package:my_cloud_teste/widgets/horizontal_card.dart';
 import 'package:my_cloud_teste/widgets/vertical_card.dart';
 
-import 'movie/movie_list_page.dart';
+import '../../movie/movie_list_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   var is_visible = 0;
   var _response;
   // is_visible == 0 (default), is_visible == 1 (no results), is_visible == 2 (found results)
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

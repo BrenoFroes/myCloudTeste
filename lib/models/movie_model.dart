@@ -2,7 +2,7 @@ class Movie {
   late int id;
   late String title;
   late String original_title;
-  late String votation;
+  late num vote;
   late String backdrop_path;
   late String poster_path;
   late String description;
@@ -11,7 +11,7 @@ class Movie {
       {required this.id,
       required this.title,
       required this.original_title,
-      required this.votation,
+      required this.vote,
       required this.backdrop_path,
       required this.poster_path,
       required this.description});
@@ -21,7 +21,7 @@ class Movie {
     id = json['id'];
     title = json['title'];
     original_title = json['original_title'];
-    votation = json['votation'];
+    vote = json['vote_average'];
     backdrop_path = json['backdrop_path'];
     poster_path = json['poster_path'];
     description = json['overview'];

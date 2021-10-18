@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-const LargeTextSize = 26.0;
-const MediumTextSize = 20.0;
+const LargeTextSize = 20.0;
+const MediumTextSize = 16.0;
 const BodyTextSize = 8.0;
 
 const String FontNameDefaultTitle = 'Raleway';

@@ -23,7 +23,10 @@ class VerticalCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                MovieImage(poster_path: poster_path),
+                MovieImage(
+                  poster_path: poster_path,
+                  width: 80.0,
+                ),
                 SizedBox(
                   height: 5.0,
                 ),

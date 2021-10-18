@@ -30,28 +30,26 @@ class _DetailMovieState extends State<DetailMovie> {
       appBar: AppBar(
         title: Text('Detalhes do filme'),
       ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
+      body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(16.0),
           child: Column(
             children: [
-              Container(
-                height: 300.0,
-                child: Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        MovieImage(poster_path: widget.movie.backdrop_path),
-                        Text(widget.movie.title, style: TitleTextStyle),
-                        Text(widget.movie.original_title, style: TitleCard),
-                        Text(widget.movie.description, style: SubtitleCard),
-                      ],
-                    ),
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      MovieImage(
+                          poster_path: widget.movie.backdrop_path,
+                          width: 320.0),
+                      Text(widget.movie.title, style: TitleTextStyle),
+                      Text(widget.movie.original_title, style: TitleCard),
+                      Text(widget.movie.description, style: SubtitleCard),
+                      Text("Votação: ${widget.movie.vote}", style: TitleCard),
+                    ],
                   ),
                 ),
               ),
@@ -66,7 +64,7 @@ class _DetailMovieState extends State<DetailMovie> {
                   style: ElevatedButton.styleFrom(
                     primary: PrimaryRed3,
                     padding:
-                        EdgeInsets.symmetric(horizontal: 120, vertical: 20),
+                        EdgeInsets.symmetric(horizontal: 120, vertical: 10),
                     textStyle:
                         TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                   ),
